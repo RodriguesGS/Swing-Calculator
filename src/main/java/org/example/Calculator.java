@@ -13,6 +13,7 @@ public class Calculator extends JFrame {
         controller = new CalculatorController();
         windowConfiguration();
         display = configureDisplay();
+        getContentPane().setLayout(new BorderLayout());
         add(display, BorderLayout.NORTH);
         add(buttonPanel(), BorderLayout.CENTER);
         setVisible(true);
@@ -20,7 +21,7 @@ public class Calculator extends JFrame {
 
     private void windowConfiguration() {
         setTitle("Calculadora");
-        setSize(300, 200);
+        setSize(300, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
     }
@@ -29,6 +30,8 @@ public class Calculator extends JFrame {
         JTextField display = new JTextField();
         display.setEditable(false);
         display.setHorizontalAlignment(JTextField.RIGHT);
+        display.setFont(new Font("Arial", Font.BOLD, 24));
+        display.setPreferredSize(new Dimension(300, 80));
         return display;
     }
 

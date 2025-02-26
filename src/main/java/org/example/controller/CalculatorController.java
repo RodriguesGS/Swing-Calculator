@@ -3,6 +3,7 @@ package org.example.controller;
 public class CalculatorController {
     private String operation;
     private double num1;
+    private boolean display = false;
 
     private double executeOperation(double num1, double num2, String operation) {
         return switch (operation) {
@@ -15,9 +16,19 @@ public class CalculatorController {
     }
 
     private String calculateResult(String text) {
-        double num2 = Double.parseDouble(text);
-        double result = executeOperation(num1,num2, operation);
-        return String.valueOf(result);
+        try {
+            String[] parts = text.split(" ");
+            if (parts.length < 3) return text;
+
+            double num1 = Double.parseDouble(parts[0]);
+            String operation = parts[1];
+            double num2 = Double.parseDouble(parts[2]);
+            double result = executeOperation(num1, num2, operation);
+
+            return String.valueOf(result);
+        } catch (Exception e) {
+            return "Error" + e;
+        }
     }
 
     private String cleanDisplay() {
@@ -31,15 +42,24 @@ public class CalculatorController {
     }
 
     public String processCommand(String command, String text) {
-        if (command.matches("\\d"))
+        if (command.matches("\\d")) {
+            if (display) {
+                display = false;
+                return command;
+            }
             return text + command;
+        }
         else if ("C".equals(command))
             return cleanDisplay();
-        else if ("=".equals(command))
+        else if ("=".equals(command)) {
+            display = true;
             return calculateResult(text);
+        }
+
         else {
-            store(command, text);
-            return "";
+            if (!text.isEmpty() && !text.endsWith(" "))
+                return text + " " + command + " ";
+            return text;
         }
 
 
