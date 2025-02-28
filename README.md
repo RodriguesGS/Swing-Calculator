@@ -1,10 +1,6 @@
-[PROJECT__BADGE]: https://img.shields.io/badge/⌛Em_construção-111?style=for-the-badge&logo=project
-
 # Swing Calculator
 
-Uma Calculadora científica feita utilizando Swing
-
-![project][PROJECT__BADGE]
+Uma Calculadora simples utilizando Swing
 
 ## Tech Stack
 
